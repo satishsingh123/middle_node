@@ -37,6 +37,21 @@ void middle_print(struct node* head)
 	printf("\nmiddle  node is %d\n",last_end->data);
 }
 
+struct node* reverse(struct node* head)
+{
+	struct node* temp;
+	struct node* ptr;
+	struct node* previous = NULL;
+	ptr = head;
+	while(ptr !=NULL)
+	{
+		temp = ptr->next;
+		ptr->next = previous;
+		previous = ptr;
+		ptr = temp;
+	}
+	return previous;
+}
 
 void print_list(struct node* head)
 {
@@ -60,15 +75,20 @@ int main()
 {
     struct node* head = NULL;
     int i;
- 
     for (i=5; i>0; i--)
     {
         push(&head, i);
 
     }
- 
+ 	
         print_list(head);
         print_middle(head);
 	middle_print(head);
+	printf("****************Before Reverse******************\n");
+	print_list(head);
+	
+	printf("****************After Reverse******************\n");
+	head = reverse(head);
+	print_list(head);
     return 0;
 }
